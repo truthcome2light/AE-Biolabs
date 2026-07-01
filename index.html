@@ -162,7 +162,35 @@ header.site{
 .nav-cta::after{display:none}
 .nav-cta:hover{background:var(--steel)}
 .burger{display:none; background:none; border:0; cursor:pointer; padding:8px}
-.burger span{display:block; width:22px; height:2px; background:var(--ink); margin:4px 0}
+.burger span{display:block; width:22px; height:2px; background:var(--ink); margin:4px 0; transition:transform .22s, opacity .18s}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* mobile drawer */
+.mobile-drawer{
+  display:none; position:fixed; top:70px; left:0; right:0; bottom:0;
+  z-index:190; background:#fff; padding:28px 24px;
+  flex-direction:column; gap:6px; overflow-y:auto;
+  border-top:1px solid var(--line-soft);
+  transform:translateX(100%); transition:transform .28s cubic-bezier(.16,.84,.44,1);
+}
+.mobile-drawer.open{transform:translateX(0)}
+@media(max-width:920px){
+  .mobile-drawer{display:flex}
+}
+.mobile-drawer a{
+  font-size:1.15rem; font-weight:500; color:var(--ink);
+  padding:16px 10px; border-bottom:1px solid var(--line-soft);
+  transition:color .18s;
+}
+.mobile-drawer a:last-child{border-bottom:0}
+.mobile-drawer a:hover{color:var(--steel)}
+.mobile-drawer .m-cta{
+  margin-top:18px; background:var(--navy); color:#fff;
+  border-radius:10px; text-align:center; font-weight:600;
+  padding:16px; border-bottom:0;
+}
 
 /* =====================================================================
    LAUNCH BAR
@@ -713,9 +741,18 @@ footer.site{background:var(--navy); color:#9fb6c8; padding:70px 0 0}
       <a href="#about">About</a>
       <a class="nav-cta" href="#catalog">Enter portal</a>
     </nav>
-    <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="burger" aria-label="Menu" onclick="toggleDrawer()"><span></span><span></span><span></span></button>
   </div>
 </header>
+
+<!-- mobile nav drawer -->
+<nav class="mobile-drawer" id="mobileDrawer">
+  <a href="#catalog" onclick="closeDrawer()">Catalog</a>
+  <a href="#proof" onclick="closeDrawer()">How it's tested</a>
+  <a href="#survey" onclick="closeDrawer()">COA check</a>
+  <a href="#about" onclick="closeDrawer()">About</a>
+  <a class="m-cta" href="#catalog" onclick="closeDrawer()">Enter portal</a>
+</nav>
 
 <!-- ======================= HERO ======================= -->
 <main id="top">
@@ -1104,6 +1141,21 @@ function closePdModal(){
   document.removeEventListener('keydown', _pdEsc);
 }
 function _pdEsc(e){ if(e.key==='Escape') closePdModal(); }
+
+/* ====== MOBILE NAV DRAWER ====== */
+function toggleDrawer(){
+  var drawer = document.getElementById('mobileDrawer');
+  var burger = document.querySelector('.burger');
+  var isOpen = drawer.classList.toggle('open');
+  burger.classList.toggle('open', isOpen);
+  burger.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeDrawer(){
+  document.getElementById('mobileDrawer').classList.remove('open');
+  document.querySelector('.burger').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
 /* =====================================================================
    CONSENT — genuinely gates the trackers (default denied).
