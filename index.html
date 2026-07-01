@@ -651,7 +651,7 @@ footer.site{background:var(--navy); color:#9fb6c8; padding:70px 0 0}
 <!-- ======================= 21+ FULL GATE ======================= -->
 <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
   <div class="gate-card">
-    <svg class="gate-mark" viewBox="0 0 500 480" aria-hidden="true"><use href="#valknut"/></svg>
+    <svg class="gate-mark" viewBox="0 0 220 190" aria-hidden="true"><use href="#valknut"/></svg>
     <h1 id="gate-title">ÆLabs</h1>
     <div class="gate-tag">Purity · Precision · Purpose</div>
     <p>This site provides research compounds and supporting documentation intended for licensed laboratory and scientific research only.</p>
@@ -670,7 +670,7 @@ footer.site{background:var(--navy); color:#9fb6c8; padding:70px 0 0}
 <div id="portal" role="dialog" aria-modal="true" aria-label="Account portal">
   <div class="portal-brand">
     <div class="pgrid"></div>
-    <svg class="pmark" viewBox="0 0 500 480" aria-hidden="true"><use href="#valknut"/></svg>
+    <svg class="pmark" viewBox="0 0 220 190" aria-hidden="true"><use href="#valknut"/></svg>
     <h2>The ÆLabs<br/>research portal</h2>
     <div class="ptag">Purity · Precision · Purpose</div>
     <p class="plede">Access to the full catalog, batch Certificates of Analysis, and test reports is reserved for registered members.</p>
@@ -731,7 +731,7 @@ footer.site{background:var(--navy); color:#9fb6c8; padding:70px 0 0}
 <header class="site">
   <div class="wrap nav">
     <a class="brand" href="#top">
-      <svg class="mark" viewBox="0 0 500 480" aria-hidden="true"><use href="#valknut"/></svg>
+      <svg class="mark" viewBox="0 0 220 190" aria-hidden="true"><use href="#valknut"/></svg>
       <span class="name">ÆLabs</span>
     </a>
     <nav class="nav-links">
@@ -771,7 +771,7 @@ footer.site{background:var(--navy); color:#9fb6c8; padding:70px 0 0}
       </div>
     </div>
     <div class="hero-mark hero-float">
-      <svg viewBox="0 0 500 480" aria-label="ÆLabs Valknut mark">
+      <svg viewBox="0 0 220 190" aria-label="ÆLabs Valknut mark">
         <use href="#valknut-animated"/>
       </svg>
     </div>
@@ -866,7 +866,7 @@ footer.site{background:var(--navy); color:#9fb6c8; padding:70px 0 0}
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <div class="name"><svg class="mark" viewBox="0 0 500 480" aria-hidden="true"><use href="#valknut"/></svg> ÆLabs</div>
+        <div class="name"><svg class="mark" viewBox="0 0 220 190" aria-hidden="true"><use href="#valknut"/></svg> ÆLabs</div>
         <p>High-purity research compounds for laboratory and scientific research, documented with batch-specific third-party Certificates of Analysis.</p>
         <div class="addr">
           750 W 7th St #811153<br/>
@@ -954,19 +954,19 @@ footer.site{background:var(--navy); color:#9fb6c8; padding:70px 0 0}
 <!-- ======================= SVG DEFS: Valknut master mark ======================= -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <!-- master mark: three filled triangles (two top + one center), matching the vial labels.
-         Draw order: Steel center first (behind), then Frost left and Sky right on top. -->
+    <!-- master mark: exact polygon paths from aelabs_logo.svg (viewBox 0 0 220 190)
+         Draw order: Steel bottom first (behind), Frost left, Sky right on top. -->
     <g id="valknut">
-      <path d="M250,112 L335,292 L165,292 Z" fill="#2878A8" stroke="#0A1E30" stroke-width="8" stroke-linejoin="round"/>
-      <path d="M170,72 L255,252 L85,252 Z"  fill="#B8D4E8" stroke="#0A1E30" stroke-width="8" stroke-linejoin="round"/>
-      <path d="M330,72 L415,252 L245,252 Z" fill="#5A9EC8" stroke="#0A1E30" stroke-width="8" stroke-linejoin="round"/>
+      <polygon points="110,77.1 55,172.3 165,172.3" fill="#2878A8" stroke="#0A1E30" stroke-width="5" stroke-linejoin="round"/>
+      <polygon points="72,18 17,113.3 127,113.3"    fill="#B8D4E8" stroke="#0A1E30" stroke-width="5" stroke-linejoin="round"/>
+      <polygon points="148,18 93,113.3 203,113.3"   fill="#5A9EC8" stroke="#0A1E30" stroke-width="5" stroke-linejoin="round"/>
     </g>
 
-    <!-- animated mark: peaks pop in (center, then left, then right) -->
+    <!-- animated mark: steel pops first, then frost, then sky -->
     <g id="valknut-animated">
-      <path class="vk-band b1" d="M250,112 L335,292 L165,292 Z" fill="#2878A8" stroke="#0A1E30" stroke-width="8" stroke-linejoin="round"/>
-      <path class="vk-band b2" d="M170,72 L255,252 L85,252 Z"  fill="#B8D4E8" stroke="#0A1E30" stroke-width="8" stroke-linejoin="round"/>
-      <path class="vk-band b3" d="M330,72 L415,252 L245,252 Z" fill="#5A9EC8" stroke="#0A1E30" stroke-width="8" stroke-linejoin="round"/>
+      <polygon class="vk-band b1" points="110,77.1 55,172.3 165,172.3" fill="#2878A8" stroke="#0A1E30" stroke-width="5" stroke-linejoin="round"/>
+      <polygon class="vk-band b2" points="72,18 17,113.3 127,113.3"    fill="#B8D4E8" stroke="#0A1E30" stroke-width="5" stroke-linejoin="round"/>
+      <polygon class="vk-band b3" points="148,18 93,113.3 203,113.3"   fill="#5A9EC8" stroke="#0A1E30" stroke-width="5" stroke-linejoin="round"/>
     </g>
   </defs>
 </svg>
