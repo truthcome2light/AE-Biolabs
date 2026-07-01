@@ -542,6 +542,60 @@ footer.site{background:var(--navy); color:#9fb6c8; padding:70px 0 0}
 .c-manage{background:transparent; color:var(--muted); border-color:transparent; text-decoration:underline}
 
 /* =====================================================================
+   PRODUCT DETAIL MODAL — bottom sheet
+   ===================================================================== */
+#pdModal{
+  position:fixed; inset:0; z-index:8000; display:none;
+  align-items:flex-end; justify-content:center;
+  background:rgba(10,30,48,.52); backdrop-filter:blur(4px);
+  padding:0;
+}
+#pdModal.open{display:flex}
+.pd-sheet{
+  width:100%; max-width:900px; max-height:90vh;
+  background:#fff; border-radius:22px 22px 0 0;
+  overflow-y:auto; position:relative;
+  box-shadow:0 -24px 70px rgba(10,30,48,.25);
+  transform:translateY(100%);
+  transition:transform .38s cubic-bezier(.16,.84,.44,1);
+}
+#pdModal.open .pd-sheet{transform:translateY(0)}
+.pd-drag{
+  width:44px; height:4px; background:var(--line); border-radius:4px;
+  margin:14px auto 0; cursor:pointer;
+}
+.pd-close{
+  position:absolute; top:14px; right:16px; background:var(--ice); border:0;
+  width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:1rem;
+  display:flex; align-items:center; justify-content:center; color:var(--muted);
+  transition:background .18s, color .18s; line-height:1;
+}
+.pd-close:hover{background:var(--frost); color:var(--navy)}
+.pd-inner{display:grid; grid-template-columns:.9fr 1.1fr}
+.pd-media{
+  background:var(--ice); display:flex; align-items:center; justify-content:center;
+  padding:48px 32px; min-height:300px;
+}
+.pd-media img{width:100%; max-width:240px; object-fit:contain; border-radius:6px}
+.pd-media svg.vial{width:48%; height:auto}
+.pd-info{padding:42px 36px 36px}
+.pd-tier{font-family:var(--mono); font-size:.64rem; letter-spacing:.18em; text-transform:uppercase; color:var(--steel); margin-bottom:10px}
+.pd-tier.frost{color:#6f9fc0}
+.pd-name{font-family:var(--display); font-weight:600; font-size:2.1rem; line-height:1.04; margin-bottom:4px}
+.pd-meta{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:20px 0}
+.pd-meta-item .mk{font-family:var(--mono); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+.pd-meta-item .mv{font-size:.9rem; font-weight:500; color:var(--ink); margin-top:5px}
+.pd-desc{font-size:.91rem; color:var(--muted); line-height:1.65; border-top:1px solid var(--line); padding-top:18px; margin-bottom:22px}
+.pd-foot{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.pd-price{font-family:var(--mono); font-size:1.3rem; font-weight:500; color:var(--navy)}
+.pd-ruo{font-size:.68rem; color:#9aabbb; margin-top:14px; letter-spacing:.02em}
+@media(max-width:680px){
+  .pd-inner{grid-template-columns:1fr}
+  .pd-media{min-height:200px; padding:32px}
+  .pd-info{padding:28px 22px 28px}
+}
+
+/* =====================================================================
    RESPONSIVE
    ===================================================================== */
 @media (max-width:920px){
@@ -835,6 +889,31 @@ footer.site{background:var(--navy); color:#9fb6c8; padding:70px 0 0}
   </div>
 </div>
 
+<!-- ======================= PRODUCT DETAIL MODAL ======================= -->
+<div id="pdModal" onclick="if(event.target===this)closePdModal()" role="dialog" aria-modal="true" aria-label="Product details">
+  <div class="pd-sheet" id="pdSheet">
+    <div class="pd-drag" onclick="closePdModal()" title="Close"></div>
+    <button class="pd-close" onclick="closePdModal()" aria-label="Close">✕</button>
+    <div class="pd-inner">
+      <div class="pd-media" id="pdMedia"></div>
+      <div class="pd-info">
+        <div class="pd-tier" id="pdTier"></div>
+        <div class="pd-name" id="pdName"></div>
+        <div class="pd-meta">
+          <div class="pd-meta-item"><div class="mk">Format</div><div class="mv" id="pdFormat"></div></div>
+          <div class="pd-meta-item"><div class="mk">CAS No.</div><div class="mv" id="pdCas"></div></div>
+        </div>
+        <div class="pd-desc" id="pdDesc"></div>
+        <div class="pd-foot">
+          <div class="pd-price" id="pdPrice"></div>
+          <span class="coa-badge">Batch COA</span>
+        </div>
+        <div class="pd-ruo">For research use only · Not for human or animal consumption</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ======================= SVG DEFS: Valknut master mark ======================= -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -989,13 +1068,42 @@ function renderCatalog(){
         '<h3>'+p.name+'</h3>'+
         '<div class="sub">'+p.mg+' · lyophilized</div>'+
         '<span class="coa-badge">Batch COA</span>'+
-        '<div class="card-foot"><span class="price">From '+p.from+'</span><button class="add" onclick="alert(\'Research-only catalog — prototype demo only.\')">View details</button></div>'+
+        '<div class="card-foot"><span class="price">From '+p.from+'</span><button class="add" onclick="openModal(\''+p.id+'\')">View details</button></div>'+
         '<div class="ruo">For research use only.</div>'+
       '</div>'+
     '</article>';
   }).join('');
 }
 renderCatalog();
+
+/* =====================================================================
+   PRODUCT DETAIL MODAL
+   ===================================================================== */
+function openModal(id){
+  var p = PRODUCTS.filter(function(x){ return x.id===id; })[0];
+  if(!p) return;
+  document.getElementById('pdTier').textContent = p.tier.charAt(0).toUpperCase()+p.tier.slice(1)+' · '+p.tlab;
+  document.getElementById('pdTier').className = 'pd-tier '+p.tier;
+  document.getElementById('pdName').textContent = p.name;
+  document.getElementById('pdFormat').textContent = p.mg+' · lyophilized';
+  document.getElementById('pdCas').textContent = p.cas;
+  document.getElementById('pdDesc').textContent = p.desc;
+  document.getElementById('pdPrice').textContent = 'From '+p.from;
+  var media = document.getElementById('pdMedia');
+  media.innerHTML = p.img
+    ? '<img src="'+p.img+'" alt="'+p.name+' research vial"/>'
+    : vialSVG(p);
+  var modal = document.getElementById('pdModal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.addEventListener('keydown', _pdEsc);
+}
+function closePdModal(){
+  document.getElementById('pdModal').classList.remove('open');
+  document.body.style.overflow = '';
+  document.removeEventListener('keydown', _pdEsc);
+}
+function _pdEsc(e){ if(e.key==='Escape') closePdModal(); }
 
 /* =====================================================================
    CONSENT — genuinely gates the trackers (default denied).
