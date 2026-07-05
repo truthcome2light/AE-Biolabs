@@ -1,0 +1,1037 @@
+<title>COA Field Guide — ÆLabs</title>
+<style>
+:root {
+  --navy:   #0A1E30;
+  --navy2:  #0F2942;
+  --steel:  #2878A8;
+  --sky:    #5A9EC8;
+  --frost:  #B8D4E8;
+  --ice:    #EEF4F8;
+  --white:  #FFFFFF;
+  --ink:    #0A1E30;
+  --body-c: #2d4a60;
+  --muted:  #4a6a82;
+  --line:   rgba(10,30,48,.12);
+  --ok:     #2a9d5c;
+  --warn:   #c0392b;
+  --warn-bg:#fdf2f2;
+
+  --sans:   -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --serif:  Georgia, 'Times New Roman', serif;
+  --mono:   ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
+
+  --r: 10px;
+  --shadow: 0 2px 12px rgba(10,30,48,.10);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --navy:   #0d2438;
+    --navy2:  #162f47;
+    --steel:  #4190c0;
+    --sky:    #6ab0d8;
+    --frost:  #8ab8d0;
+    --ice:    #1a2f42;
+    --white:  #0f1e2d;
+    --ink:    #dde8f0;
+    --body-c: #a8c4d8;
+    --muted:  #7a9db8;
+    --line:   rgba(180,210,230,.12);
+    --ok:     #3abf72;
+    --warn:   #e05555;
+    --warn-bg:#2a1515;
+    --shadow: 0 2px 12px rgba(0,0,0,.35);
+  }
+}
+
+:root[data-theme="light"] {
+  --navy:#0A1E30;--navy2:#0F2942;--steel:#2878A8;--sky:#5A9EC8;--frost:#B8D4E8;
+  --ice:#EEF4F8;--white:#FFFFFF;--ink:#0A1E30;--body-c:#2d4a60;--muted:#4a6a82;
+  --line:rgba(10,30,48,.12);--ok:#2a9d5c;--warn:#c0392b;--warn-bg:#fdf2f2;
+  --shadow:0 2px 12px rgba(10,30,48,.10);
+}
+:root[data-theme="dark"] {
+  --navy:#0d2438;--navy2:#162f47;--steel:#4190c0;--sky:#6ab0d8;--frost:#8ab8d0;
+  --ice:#1a2f42;--white:#0f1e2d;--ink:#dde8f0;--body-c:#a8c4d8;--muted:#7a9db8;
+  --line:rgba(180,210,230,.12);--ok:#3abf72;--warn:#e05555;--warn-bg:#2a1515;
+  --shadow:0 2px 12px rgba(0,0,0,.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--steel); text-underline-offset: 3px; }
+img, svg { display: block; max-width: 100%; }
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+
+/* ── label / eyebrow ── */
+.label {
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+/* ════════════════════════════════════════
+   HEADER
+════════════════════════════════════════ */
+.doc-header {
+  background: var(--navy);
+  color: var(--frost);
+  padding: 48px 0 40px;
+  border-bottom: 3px solid var(--steel);
+}
+.header-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.valknut {
+  width: 42px;
+  height: 36px;
+  flex: none;
+}
+.brand-name {
+  font-family: var(--serif);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .02em;
+}
+.brand-tag {
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--frost);
+  margin-top: 3px;
+}
+.doc-meta {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: #7e98ad;
+  line-height: 1.8;
+}
+.doc-title {
+  margin-top: 32px;
+}
+.doc-title h1 {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+.doc-title .sub {
+  font-size: 1rem;
+  color: #9fb8cc;
+  margin-top: 10px;
+  max-width: 52ch;
+}
+.ruo-bar {
+  margin-top: 22px;
+  background: rgba(40,120,168,.25);
+  border: 1px solid rgba(90,158,200,.3);
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .06em;
+  color: var(--frost);
+  display: inline-block;
+}
+
+/* ════════════════════════════════════════
+   NAV / CONTENTS
+════════════════════════════════════════ */
+.toc {
+  background: var(--ice);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.toc-inner {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.toc a {
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--steel);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  transition: background .15s, border-color .15s;
+  white-space: nowrap;
+}
+.toc a:hover { background: var(--steel); color: #fff; border-color: var(--steel); }
+
+/* ════════════════════════════════════════
+   SECTIONS
+════════════════════════════════════════ */
+section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+section:last-of-type { border-bottom: none; }
+section.alt { background: var(--ice); }
+section.dark { background: var(--navy); color: #c8dde8; }
+section.dark h2 { color: #fff; }
+section.dark .label { color: var(--frost); }
+section.dark p { color: #9fb8cc; }
+
+section h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+  text-wrap: balance;
+  margin: 10px 0 16px;
+}
+section p { color: var(--body-c); font-size: .97rem; max-width: 66ch; }
+section p + p { margin-top: 12px; }
+
+/* ── section head spacing ── */
+.sec-head { margin-bottom: 32px; }
+
+/* ════════════════════════════════════════
+   MOCK COA PANEL — the teaching device
+════════════════════════════════════════ */
+.coa-doc {
+  border: 1.5px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  font-family: var(--mono);
+}
+.coa-doc-head {
+  background: var(--navy);
+  color: var(--frost);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.coa-doc-head .coa-title { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; }
+.coa-doc-head .coa-batch { font-size: .68rem; color: #7e98ad; }
+.coa-field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.coa-field {
+  padding: 16px 18px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+  position: relative;
+}
+.coa-field:hover { background: var(--ice); }
+.coa-field .cf-key {
+  font-size: .62rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.coa-field .cf-val {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-top: 5px;
+}
+.coa-field .cf-val.ok { color: var(--ok); }
+.coa-field .cf-val.neutral { color: var(--steel); }
+.coa-field .cf-note {
+  font-size: .62rem;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+.coa-field .cf-ann {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: .56rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background: var(--steel);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+.coa-field .cf-ann.warn-tag { background: var(--warn); }
+
+/* ════════════════════════════════════════
+   FIELD BREAKDOWN CARDS
+════════════════════════════════════════ */
+.field-cards { display: flex; flex-direction: column; gap: 2px; }
+.fc {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 22px 24px;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px 32px;
+  align-items: start;
+}
+.fc-label-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fc-num {
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: var(--muted);
+  letter-spacing: .1em;
+}
+.fc-name {
+  font-family: var(--mono);
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--steel);
+  letter-spacing: .04em;
+}
+.fc-bench {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 10%, transparent);
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 4px;
+}
+.fc-body h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 7px;
+}
+.fc-body p { font-size: .9rem; color: var(--body-c); max-width: none; }
+.fc-body .distinction {
+  margin-top: 12px;
+  background: var(--ice);
+  border-left: 3px solid var(--steel);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+  font-size: .84rem;
+  color: var(--body-c);
+}
+.fc-body .distinction b { color: var(--ink); }
+
+@media (max-width: 600px) {
+  .fc { grid-template-columns: 1fr; }
+}
+
+/* ════════════════════════════════════════
+   PURITY SCALE
+════════════════════════════════════════ */
+.purity-scale { margin-top: 24px; }
+.ps-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.ps-row:last-child { border-bottom: none; }
+.ps-pct {
+  font-family: var(--mono);
+  font-size: .9rem;
+  font-weight: 600;
+  min-width: 80px;
+  color: var(--ink);
+}
+.ps-bar-wrap { flex: 1; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.ps-bar { height: 100%; border-radius: 4px; background: var(--steel); }
+.ps-label { font-size: .82rem; color: var(--body-c); min-width: 200px; }
+.ps-tag { font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; padding: 2px 7px; border-radius: 3px; }
+.ps-tag.green { background: color-mix(in srgb, var(--ok) 12%, transparent); color: var(--ok); }
+.ps-tag.blue  { background: color-mix(in srgb, var(--steel) 12%, transparent); color: var(--steel); }
+.ps-tag.grey  { background: var(--ice); color: var(--muted); }
+
+/* ════════════════════════════════════════
+   RED FLAGS
+════════════════════════════════════════ */
+.flags { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+.flag {
+  background: var(--warn-bg);
+  border: 1px solid color-mix(in srgb, var(--warn) 30%, transparent);
+  border-left: 3px solid var(--warn);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 14px 16px;
+}
+.flag .flag-head {
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--warn);
+  margin-bottom: 5px;
+}
+.flag p { font-size: .84rem; color: var(--body-c); max-width: none; }
+
+@media (max-width: 600px) { .flags { grid-template-columns: 1fr; } }
+
+/* ════════════════════════════════════════
+   CHECKLIST
+════════════════════════════════════════ */
+.checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: .92rem;
+  color: var(--body-c);
+}
+.checklist li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--steel);
+  border-radius: 4px;
+  flex: none;
+  margin-top: 2px;
+}
+.checklist li b { color: var(--ink); }
+
+/* ════════════════════════════════════════
+   DISTINCTION BOX (net peptide vs purity)
+════════════════════════════════════════ */
+.versus {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+.vs-box {
+  border-radius: var(--r);
+  padding: 20px 20px 18px;
+  border: 1px solid var(--line);
+}
+.vs-box.a { background: color-mix(in srgb, var(--steel) 8%, var(--white)); border-color: color-mix(in srgb, var(--steel) 25%, transparent); }
+.vs-box.b { background: color-mix(in srgb, var(--ok) 8%, var(--white)); border-color: color-mix(in srgb, var(--ok) 25%, transparent); }
+.vs-title {
+  font-family: var(--mono);
+  font-size: .66rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.vs-box.a .vs-title { color: var(--steel); }
+.vs-box.b .vs-title { color: var(--ok); }
+.vs-box h4 { font-size: .95rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.vs-box p { font-size: .83rem; color: var(--body-c); max-width: none; }
+@media (max-width: 540px) { .versus { grid-template-columns: 1fr; } }
+
+/* ════════════════════════════════════════
+   LIABILITY SECTION
+════════════════════════════════════════ */
+.liability-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+.li-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(184,212,232,.18);
+  border-radius: var(--r);
+  padding: 20px 20px 18px;
+}
+.li-card .li-head {
+  font-family: var(--mono);
+  font-size: .64rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--frost);
+  margin-bottom: 8px;
+}
+.li-card h4 { font-size: .95rem; font-weight: 600; color: #fff; margin-bottom: 7px; }
+.li-card p { font-size: .82rem; color: #9fb8cc; max-width: none; }
+@media (max-width: 560px) { .liability-grid { grid-template-columns: 1fr; } }
+
+/* ════════════════════════════════════════
+   DISCLAIMER BLOCK
+════════════════════════════════════════ */
+.disclaimer-block {
+  background: var(--navy2);
+  border: 1px solid rgba(184,212,232,.15);
+  border-radius: var(--r);
+  padding: 24px 26px;
+  margin-top: 32px;
+  font-family: var(--mono);
+  font-size: .7rem;
+  line-height: 1.8;
+  color: #6e8fa5;
+}
+.disclaimer-block .dis-head {
+  font-size: .64rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--frost);
+  margin-bottom: 10px;
+}
+.disclaimer-block b { color: #9fb8cc; }
+
+/* ════════════════════════════════════════
+   QUICK REF CARD
+════════════════════════════════════════ */
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+.qr {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--steel);
+  border-radius: var(--r);
+  padding: 16px 16px 14px;
+  box-shadow: var(--shadow);
+}
+.qr .qr-field { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.qr .qr-bench { font-family: var(--mono); font-size: 1rem; font-weight: 600; color: var(--steel); margin: 6px 0 4px; }
+.qr .qr-note { font-size: .78rem; color: var(--body-c); line-height: 1.4; }
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+footer {
+  background: var(--navy);
+  padding: 32px 0;
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: #4a6a82;
+  text-align: center;
+  line-height: 1.9;
+}
+footer b { color: var(--frost); }
+
+/* ════════════════════════════════════════
+   PRINT
+════════════════════════════════════════ */
+@media print {
+  .toc { display: none; }
+  section { break-inside: avoid; }
+  .coa-doc, .flags, .fc { break-inside: avoid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<!-- HEADER -->
+<header class="doc-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <div class="brand">
+        <svg class="valknut" viewBox="0 0 220 190" aria-hidden="true">
+          <polygon points="110,77.1 55,172.3 165,172.3" fill="#2878A8" stroke="#0A1E30" stroke-width="5" stroke-linejoin="round"/>
+          <polygon points="72,18 17,113.3 127,113.3"    fill="#B8D4E8" stroke="#0A1E30" stroke-width="5" stroke-linejoin="round"/>
+          <polygon points="148,18 93,113.3 203,113.3"   fill="#5A9EC8" stroke="#0A1E30" stroke-width="5" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <div class="brand-name">ÆLabs</div>
+          <div class="brand-tag">Research Documentation</div>
+        </div>
+      </div>
+      <div class="doc-meta">
+        DOCUMENT TYPE · FIELD GUIDE<br>
+        EDITION · 2026-I<br>
+        AUDIENCE · QUALIFIED RESEARCHERS<br>
+        CLASSIFICATION · PUBLIC
+      </div>
+    </div>
+    <div class="doc-title">
+      <div class="label">COA Field Guide</div>
+      <h1>How to Read a Certificate<br>of Analysis</h1>
+      <p class="sub">A field reference for researchers evaluating peptide purity documentation — covering every data field, quality benchmarks, red flags, and your responsibilities as the end user.</p>
+      <div class="ruo-bar">⚠ FOR RESEARCH USE ONLY · NOT FOR HUMAN OR ANIMAL CONSUMPTION</div>
+    </div>
+  </div>
+</header>
+
+<!-- TABLE OF CONTENTS -->
+<nav class="toc" aria-label="Document sections">
+  <div class="wrap">
+    <div class="toc-inner">
+      <a href="#quickref">Quick ref</a>
+      <a href="#whatis">What is a COA</a>
+      <a href="#fields">Field breakdown</a>
+      <a href="#purity">Purity scale</a>
+      <a href="#net">Net vs. HPLC</a>
+      <a href="#lotmatch">Lot matching</a>
+      <a href="#redflags">Red flags</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#liability">Researcher responsibility</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ════ QUICK REF ════ -->
+<section id="quickref" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">At a glance</div>
+      <h2>The five numbers that matter</h2>
+      <p>Before reading the full document, confirm these five fields are present and within range. If any are missing or out of spec, do not use the batch for quantitative work without re-testing.</p>
+    </div>
+    <div class="qr-grid">
+      <div class="qr">
+        <div class="qr-field">HPLC Purity</div>
+        <div class="qr-bench">≥ 99%</div>
+        <div class="qr-note">Peptide vs. peptide impurities. Does not include water or counter-ions.</div>
+      </div>
+      <div class="qr">
+        <div class="qr-field">Net Peptide Content</div>
+        <div class="qr-bench">≥ 85%</div>
+        <div class="qr-note">Actual usable peptide mass after subtracting water, salts, and counter-ions.</div>
+      </div>
+      <div class="qr">
+        <div class="qr-field">MS Identity</div>
+        <div class="qr-bench">Confirmed</div>
+        <div class="qr-note">Observed mass matches theoretical mass of the target compound exactly.</div>
+      </div>
+      <div class="qr">
+        <div class="qr-field">Sterility</div>
+        <div class="qr-bench">Pass</div>
+        <div class="qr-note">Absence of microbial contamination per applicable method.</div>
+      </div>
+      <div class="qr">
+        <div class="qr-field">Endotoxin</div>
+        <div class="qr-bench">&lt; 1 EU/mg</div>
+        <div class="qr-note">Bacterial endotoxin limit for in vitro research applications.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ WHAT IS A COA ════ -->
+<section id="whatis">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Foundation</div>
+      <h2>What a COA is — and is not</h2>
+      <p>A Certificate of Analysis (COA) is the primary quality assurance document in the research peptide supply chain. It records the analytical results for a specific production batch, performed by an independent third-party laboratory. It is <strong>not a marketing claim</strong> and not a guarantee of fitness for any particular research application.</p>
+      <p style="margin-top:12px">Each COA is batch-specific. The numbers on one COA do not apply to any other batch, even of the same compound. Always verify that your vial's lot number matches the COA exactly before proceeding.</p>
+    </div>
+
+    <!-- mock COA used throughout as teaching document -->
+    <div class="coa-doc">
+      <div class="coa-doc-head">
+        <div>
+          <div class="coa-title">Certificate of Analysis — ÆLabs Research</div>
+          <div class="coa-batch">Sample document · for educational reference only</div>
+        </div>
+        <div style="font-size:.65rem;color:#4a6a82;text-align:right">Issued: 2026-06-15<br>Lab: Independent QC</div>
+      </div>
+      <div class="coa-field-grid">
+        <div class="coa-field">
+          <div class="cf-ann">Identifier</div>
+          <div class="cf-key">Compound Name</div>
+          <div class="cf-val neutral">BPC-157</div>
+          <div class="cf-note">Full IUPAC name should also be present</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Identifier</div>
+          <div class="cf-key">CAS Number</div>
+          <div class="cf-val neutral">137525-51-0</div>
+          <div class="cf-note">Cross-check against registry databases</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Track this</div>
+          <div class="cf-key">Batch / Lot No.</div>
+          <div class="cf-val neutral">BPC26-05-003</div>
+          <div class="cf-note">Must match label on your vial exactly</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Purity</div>
+          <div class="cf-key">HPLC Purity</div>
+          <div class="cf-val ok">99.4%</div>
+          <div class="cf-note">Measured by RP-HPLC at 220 nm</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Content</div>
+          <div class="cf-key">Net Peptide Content</div>
+          <div class="cf-val ok">91.2%</div>
+          <div class="cf-note">By amino acid analysis — not derivable from HPLC</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Identity</div>
+          <div class="cf-key">MS Identity</div>
+          <div class="cf-val ok">Confirmed</div>
+          <div class="cf-note">Observed 1419.54 Da — theory 1419.53 Da</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Safety</div>
+          <div class="cf-key">Sterility</div>
+          <div class="cf-val ok">Pass</div>
+          <div class="cf-note">USP &lt;71&gt; membrane filtration</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Safety</div>
+          <div class="cf-key">Endotoxin</div>
+          <div class="cf-val ok">&lt; 1 EU/mg</div>
+          <div class="cf-note">LAL kinetic turbidimetric method</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Verify</div>
+          <div class="cf-key">Net Weight</div>
+          <div class="cf-val neutral">5.12 mg</div>
+          <div class="cf-note">Actual fill vs. labeled quantity</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Storage</div>
+          <div class="cf-key">Storage Condition</div>
+          <div class="cf-val neutral">−20°C, dry</div>
+          <div class="cf-note">Lyophilized; reconstitute only when needed</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Form</div>
+          <div class="cf-key">Physical Form</div>
+          <div class="cf-val neutral">White powder</div>
+          <div class="cf-note">Lyophilized; no visible discoloration</div>
+        </div>
+        <div class="coa-field">
+          <div class="cf-ann">Sequence</div>
+          <div class="cf-key">Amino Acid Sequence</div>
+          <div class="cf-val neutral">Gly-Glu-Pro…</div>
+          <div class="cf-note">Full 15-residue sequence on full COA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FIELD BREAKDOWN ════ -->
+<section id="fields" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Field by field</div>
+      <h2>What each data point actually means</h2>
+    </div>
+    <div class="field-cards">
+
+      <div class="fc">
+        <div class="fc-label-col">
+          <div class="fc-num">FIELD 01</div>
+          <div class="fc-name">HPLC Purity</div>
+          <div class="fc-bench">≥ 99% target</div>
+        </div>
+        <div class="fc-body">
+          <h3>High-Performance Liquid Chromatography</h3>
+          <p>HPLC separates a peptide from other UV-absorbing organic impurities and reports the target peptide as a percentage of total UV-absorbing material. A ≥99% result means less than 1% of the UV signal comes from anything other than your target peptide.</p>
+          <div class="distinction"><b>Critical limitation:</b> HPLC does not detect water, inorganic salts, trifluoroacetate (TFA) counter-ions, or non-chromophore contaminants. A peptide can be 99% pure by HPLC and yet only 72% net usable peptide by mass. See Field 02.</div>
+        </div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-label-col">
+          <div class="fc-num">FIELD 02</div>
+          <div class="fc-name">Net Peptide Content</div>
+          <div class="fc-bench">≥ 85% typical</div>
+        </div>
+        <div class="fc-body">
+          <h3>Actual usable peptide mass</h3>
+          <p>Net peptide content measures what fraction of the powder's mass is the actual peptide, after accounting for all co-lyophilized material — water (moisture), counter-ions like TFA or acetate, and residual salts. It is determined by a separate assay: amino acid analysis (AAA), elemental analysis, or nitrogen-based methods.</p>
+          <div class="distinction"><b>Why it matters for dosing:</b> If a vial is labeled "5 mg" and net peptide content is 80%, the actual peptide mass is 4.0 mg — not 5.0 mg. Quantitative experiments must account for this when preparing stock solutions.</div>
+        </div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-label-col">
+          <div class="fc-num">FIELD 03</div>
+          <div class="fc-name">MS Identity</div>
+          <div class="fc-bench">Confirmed</div>
+        </div>
+        <div class="fc-body">
+          <h3>Mass Spectrometry identity confirmation</h3>
+          <p>Mass spectrometry measures the molecular mass of the compound in the sample. The observed mass is compared against the theoretical mass calculated from the peptide's amino acid sequence. A "Confirmed" result means the observed mass matches theory within the instrument's tolerance — typically ±0.02 Da or better.</p>
+          <div class="distinction"><b>MS confirms identity; HPLC confirms purity. Both are required.</b> A high HPLC purity number without MS identity confirmation cannot rule out that the high-purity compound is simply a different peptide with similar chromatographic behavior.</div>
+        </div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-label-col">
+          <div class="fc-num">FIELD 04</div>
+          <div class="fc-name">Batch / Lot No.</div>
+          <div class="fc-bench">Must match vial</div>
+        </div>
+        <div class="fc-body">
+          <h3>Production batch identifier</h3>
+          <p>Every COA is issued for one specific production batch. The lot number on the COA must match the lot number printed on your vial label exactly — character for character. A COA from a different batch provides no analytical assurance for the batch you received.</p>
+          <div class="distinction"><b>On arrival:</b> Before opening any vial, compare the lot number on the label against the lot number on the COA header. Photograph both as a lab record. If they differ, contact the supplier before use and do not assume the COA applies.</div>
+        </div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-label-col">
+          <div class="fc-num">FIELD 05</div>
+          <div class="fc-name">Sterility</div>
+          <div class="fc-bench">Pass</div>
+        </div>
+        <div class="fc-body">
+          <h3>Microbial absence testing</h3>
+          <p>Sterility testing confirms the absence of viable microorganisms using membrane filtration or direct inoculation per USP &lt;71&gt; or equivalent. A passing result indicates the tested sample met the acceptance criteria at the time of testing.</p>
+          <div class="distinction"><b>Note:</b> Sterility testing is a sample-based statistical assessment, not a guarantee of 100% sterility across all units. Proper aseptic handling during reconstitution is the researcher's responsibility.</div>
+        </div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-label-col">
+          <div class="fc-num">FIELD 06</div>
+          <div class="fc-name">Endotoxin</div>
+          <div class="fc-bench">&lt; 1 EU/mg</div>
+        </div>
+        <div class="fc-body">
+          <h3>Bacterial endotoxin limit</h3>
+          <p>Endotoxins are lipopolysaccharides released from the outer membrane of gram-negative bacteria that can interfere with many in vitro assay systems. The Limulus Amebocyte Lysate (LAL) test quantifies endotoxin levels in EU/mg (endotoxin units per milligram of peptide).</p>
+          <div class="distinction"><b>In vitro threshold:</b> &lt;1 EU/mg is the standard specification for research-grade material. Higher levels can produce artifacts in cell-based assays, particularly those sensitive to TLR4 activation or NF-κB signaling pathways.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ PURITY SCALE ════ -->
+<section id="purity">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Benchmarks</div>
+      <h2>Purity thresholds and what they mean for your research</h2>
+      <p>Not all experiments demand the same purity. Use this scale to match the specification you need to your application.</p>
+    </div>
+    <div class="purity-scale">
+      <div class="ps-row">
+        <div class="ps-pct">≥ 99%</div>
+        <div class="ps-bar-wrap"><div class="ps-bar" style="width:99%;background:var(--ok)"></div></div>
+        <div class="ps-label">Quantitative binding, structural biology, sensitive cell assays</div>
+        <span class="ps-tag green">Target</span>
+      </div>
+      <div class="ps-row">
+        <div class="ps-pct">95–98%</div>
+        <div class="ps-bar-wrap"><div class="ps-bar" style="width:97%;background:var(--steel)"></div></div>
+        <div class="ps-label">Standard RUO grade · most discovery-phase research</div>
+        <span class="ps-tag blue">Standard</span>
+      </div>
+      <div class="ps-row">
+        <div class="ps-pct">90–94%</div>
+        <div class="ps-bar-wrap"><div class="ps-bar" style="width:92%;background:var(--sky)"></div></div>
+        <div class="ps-label">Preliminary screening · not suitable for quantitative work</div>
+        <span class="ps-tag grey">Caution</span>
+      </div>
+      <div class="ps-row">
+        <div class="ps-pct">&lt; 90%</div>
+        <div class="ps-bar-wrap"><div class="ps-bar" style="width:80%;background:var(--warn)"></div></div>
+        <div class="ps-label">Not recommended for published research applications</div>
+        <span class="ps-tag" style="background:color-mix(in srgb,var(--warn) 12%,transparent);color:var(--warn)">Reject</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ NET vs HPLC ════ -->
+<section id="net" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Critical distinction</div>
+      <h2>HPLC purity vs. net peptide content — not the same number</h2>
+      <p>This is the most commonly misunderstood aspect of peptide COA interpretation. Both numbers must be present; neither alone is sufficient for precise experimental dosing.</p>
+    </div>
+    <div class="versus">
+      <div class="vs-box a">
+        <div class="vs-title">HPLC Purity</div>
+        <h4>Peptide vs. peptide impurities</h4>
+        <p>Measures only UV-absorbing organic compounds. Counter-ions, moisture, and inorganic salts are invisible to the detector. A peptide can show 99% HPLC purity while containing 20–30% non-peptide mass by weight.</p>
+      </div>
+      <div class="vs-box b">
+        <div class="vs-title">Net Peptide Content</div>
+        <h4>Peptide vs. everything</h4>
+        <p>Measures the actual peptide fraction of total powder mass. Requires a separate assay (AAA, elemental analysis, or UV spectrophotometry). This is the number to use when calculating molar concentrations for cell-based or binding assays.</p>
+      </div>
+    </div>
+    <div style="margin-top:20px;padding:16px 20px;background:var(--ice);border-radius:var(--r);border-left:3px solid var(--steel)">
+      <p style="font-size:.88rem"><strong>Practical example:</strong> A 10 mg vial labeled ≥99% HPLC purity with 82% net peptide content contains approximately <strong>8.2 mg of usable peptide</strong>. Preparing a 1 mM stock solution requires adjusting the dissolved mass calculation accordingly. Ignoring net content introduces a systematic dosing error of ~18% in this example.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ LOT MATCHING ════ -->
+<section id="lotmatch">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">On arrival</div>
+      <h2>Lot matching — verify before you open the vial</h2>
+      <p>A COA from the same compound but a different batch provides zero analytical assurance for the vial in your hands. Batch numbers encode the specific production run, purification sequence, and testing event. They are not interchangeable.</p>
+    </div>
+    <ul class="checklist">
+      <li>Locate the lot/batch number in the COA header — it is typically in the format <strong>ABC26-NN-NNN</strong></li>
+      <li>Locate the lot number printed on your vial label or packaging</li>
+      <li>Compare character by character — they must be <strong>identical</strong></li>
+      <li>Photograph both the vial label and the COA header as a lab record before opening</li>
+      <li>If numbers do not match, contact your supplier immediately and do not use the material</li>
+      <li>Retain the COA with your lab records for the duration of experiments using that batch</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════ RED FLAGS ════ -->
+<section id="redflags" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Quality signals</div>
+      <h2>Red flags — signs of a deficient or fraudulent COA</h2>
+      <p>Not all COAs are equal. These patterns indicate documentation that should not be relied upon without independent re-testing.</p>
+    </div>
+    <div class="flags">
+      <div class="flag">
+        <div class="flag-head">Missing lot number</div>
+        <p>A generic COA with no batch number cannot be matched to a specific production run. It may apply to no actual batch.</p>
+      </div>
+      <div class="flag">
+        <div class="flag-head">No chromatogram or raw data</div>
+        <p>A purity percentage without the accompanying HPLC chromatogram or data file cannot be independently verified.</p>
+      </div>
+      <div class="flag">
+        <div class="flag-head">HPLC purity only — no MS identity</div>
+        <p>Without mass spectrometry identity confirmation, a high purity number cannot confirm the compound's identity.</p>
+      </div>
+      <div class="flag">
+        <div class="flag-head">In-house lab without accreditation</div>
+        <p>Testing performed by the seller's own laboratory without ISO 17025 or equivalent third-party accreditation is an inherent conflict of interest.</p>
+      </div>
+      <div class="flag">
+        <div class="flag-head">Reused or recycled COAs</div>
+        <p>The same COA appearing with different order numbers, dates, or customer information indicates documentation fraud.</p>
+      </div>
+      <div class="flag">
+        <div class="flag-head">Lot number mismatch</div>
+        <p>The COA lot number differs from the vial label. This is the single most common documentation failure in the supply chain.</p>
+      </div>
+      <div class="flag">
+        <div class="flag-head">Missing net peptide content</div>
+        <p>A COA reporting only HPLC purity without net peptide content is insufficient for accurate dosing in quantitative research.</p>
+      </div>
+      <div class="flag">
+        <div class="flag-head">Implausible purity (100.0%)</div>
+        <p>A reported purity of exactly 100% is analytically implausible for any real sample and indicates fabricated data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CHECKLIST ════ -->
+<section id="checklist">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Pre-use protocol</div>
+      <h2>Receipt checklist — complete before opening any vial</h2>
+    </div>
+    <ul class="checklist">
+      <li><b>Lot match confirmed</b> — COA batch number matches vial label exactly</li>
+      <li><b>HPLC purity ≥ 99%</b> — or at minimum meets the specification for your application</li>
+      <li><b>Net peptide content documented</b> — record the value; use it in all concentration calculations</li>
+      <li><b>MS identity confirmed</b> — observed mass matches theoretical mass</li>
+      <li><b>Sterility pass</b> — per applicable pharmacopeial method</li>
+      <li><b>Endotoxin &lt; 1 EU/mg</b> — or within the limit for your specific assay system</li>
+      <li><b>Net weight recorded</b> — note any overage or underage from the labeled quantity</li>
+      <li><b>Storage conditions verified</b> — compound was shipped and stored per COA specifications</li>
+      <li><b>Issuing lab identified</b> — third-party accredited laboratory named on the document</li>
+      <li><b>COA retained in lab records</b> — file with experiment logs for the life of the batch</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════ LIABILITY ════ -->
+<section id="liability" class="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Researcher responsibility</div>
+      <h2>Your obligations as the end user</h2>
+      <p>ÆLabs provides this documentation and educational material to support qualified researchers in evaluating analytical data. Receiving and using research-grade compounds carries obligations that rest entirely with the purchasing researcher and their institution.</p>
+    </div>
+    <div class="liability-grid">
+      <div class="li-card">
+        <div class="li-head">Qualification</div>
+        <h4>You are a qualified researcher</h4>
+        <p>By purchasing these compounds you represent that you are a qualified researcher operating within an institutional or professional research context and that you have the training, facilities, and authorization required for your intended application.</p>
+      </div>
+      <div class="li-card">
+        <div class="li-head">Regulatory compliance</div>
+        <h4>You are responsible for compliance</h4>
+        <p>You are solely responsible for understanding and complying with all applicable federal, state, and local laws and institutional regulations governing the acquisition, storage, handling, and disposal of research chemical compounds in your jurisdiction.</p>
+      </div>
+      <div class="li-card">
+        <div class="li-head">Intended use</div>
+        <h4>In vitro / laboratory use only</h4>
+        <p>These compounds are supplied exclusively for in vitro research and laboratory use. They are not approved for human or animal administration. Any use outside of a qualified research context is strictly prohibited and is the sole responsibility of the user.</p>
+      </div>
+      <div class="li-card">
+        <div class="li-head">Documentation</div>
+        <h4>Retain all records</h4>
+        <p>You are responsible for maintaining complete records of compound acquisition, lot numbers, COA documentation, storage conditions, and disposal in accordance with your institution's research record-keeping requirements and applicable regulations.</p>
+      </div>
+      <div class="li-card">
+        <div class="li-head">Verification</div>
+        <h4>Independent re-testing is your right</h4>
+        <p>ÆLabs provides third-party COA documentation as a quality assurance measure. You retain the right and responsibility to independently re-test any batch that will be used in published research or where your institutional protocols require independent verification.</p>
+      </div>
+      <div class="li-card">
+        <div class="li-head">Liability limitation</div>
+        <h4>Supplier liability is limited</h4>
+        <p>ÆLabs' liability in connection with any product is limited to the documented purchase price of that product. ÆLabs makes no representations regarding fitness for any particular research application. All research applications are at the researcher's sole discretion and risk.</p>
+      </div>
+    </div>
+
+    <div class="disclaimer-block">
+      <div class="dis-head">Legal notice — research use only</div>
+      All products supplied by ÆLabs are intended exclusively for <b>in vitro research and development purposes</b> in qualified laboratory settings. They are not drugs, are not approved by the U.S. Food and Drug Administration, and are not intended for human or animal consumption, diagnostic use, or any application outside of scientific research. The statements in this document have not been evaluated by the FDA. ÆLabs is a <b>chemical supplier</b>, not a compounding pharmacy, and does not operate as a 503A or 503B facility as defined under the Federal Food, Drug, and Cosmetic Act. By accepting this documentation, the researcher acknowledges these terms and accepts sole responsibility for all end uses of the supplied materials.
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>ÆLabs Research Documentation</b> · COA Field Guide · Edition 2026-I<br>
+    aebiolabs.com · support@aebiolabs.com · 310-929-0604<br>
+    750 W 7th St #811153, Los Angeles CA 90017<br>
+    <br>
+    For Research Use Only · Not for Human or Animal Consumption<br>
+    © 2026 ÆLabs · All rights reserved
+  </div>
+</footer>
